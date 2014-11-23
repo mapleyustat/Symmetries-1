@@ -12,6 +12,7 @@ SRCEXT := cpp
 HEADEXT := h
 SOURCES := $(shell find $(SRCDIR) -type f -name '*.$(SRCEXT)') 
 HEADERS := $(shell find $(HEADDIR) -type f -name '*.$(HEADEXT)') 
+#HEADERS := $(shell find $(HEADDIR) -type f -name '*.$(HEADEXT)') 
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 
 # Compiler Settings
