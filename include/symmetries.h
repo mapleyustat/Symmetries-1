@@ -81,13 +81,19 @@ union ind_cpl_t
 class vertex_tensor   : public boost::multi_array<ind_cpl_t, 10>
 {
    public:
+
+      typedef boost::multi_array<ind_cpl_t, 10> super;
+
       ///< Allow access to elements in tensor by means of index object
       ind_cpl_t operator()(index_t ind)
       {
 	 return (*this)[ind.w1_in][ind.w2_in][ind.w1_out][ind.k1_in][ind.k2_in][ind.k1_out][ind.s1_in][ind.s2_in][ind.s1_out][ind.s2_out];
       }
 
-
+      ///< Define more convenient constructor
+      vertex_tensor(int dim_w, int dim_k, int dim_s):
+	super::(boost::extents[dim_w][dim_w][dim_w][dim_k][dim_k][dim_k][dim_s][dim_s][dim_s][dim_s])
+      {}
    protected:
 
    private:
