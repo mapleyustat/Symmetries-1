@@ -18,7 +18,8 @@ OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 # Compiler Settings
 CFLAGS := -std=c++11 #-fopenmp # General compiler flags
 DBFLAGS := -O0 -g # Compiler flags for debugging
-PROFFLAGS := -O3 -g # Compiler flags for profiling
+PROFFLAGS := -O2 -g # Compiler flags for profiling
+OPTIMIZEFLAGS := -flto -march=native -Ofast -fopenmp # Compiler flags for optimal speed
 LIB := -lgsl -lgslcblas -lm #-fopenmp
 INC := -I include
 
@@ -28,13 +29,17 @@ $(TARGET): $(OBJECTS)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) $(HEADERS)
 	@mkdir -p $(BUILDDIR)
-	@echo " $(CC) $(CFLAGS) -O3 $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) -O3 $(INC) -c -o $@ $<
+	@echo " $(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 debug: 	CFLAGS += $(DBFLAGS)
 debug: 	$(TARGET)
 
 prof: 	CFLAGS += $(PROFFLAGS)
 prof: 	$(TARGET)
+
+optimize: CFLAGS += $(OPTIMIZEFLAGS)
+optimize: $(SOURCES) $(HEADERS)
+	$(CC) $(CFLAGS) $(INC) $(SOURCES) -o $(TARGET) $(LIB)
 
 clean:
 	@echo " Cleaning..."; 
