@@ -76,15 +76,16 @@ class operation :  public std::pair<bool,bool>
  */
 struct ind_cpl_t
 {
-   unsigned short int ind;	///< Index in the vector of independent couplings.
+   // CHANGE !!!! IMPLEMENT HERE UNSIGNED SHORT INT
+   int ind;	///< Index in the vector of independent couplings.
    operation oper; ///< Possible operations that relate two tensor elements. First bool indicates possible sign change, second one complex conjugation
 
    ///< Constructor int, bool, bool
-   ind_cpl_t(unsigned short int ind_ = -1, bool first_ = false , bool second_ = false ):
+   ind_cpl_t(int ind_ = -1, bool first_ = false , bool second_ = false ):
       ind(ind_), oper(first_, second_)
    {}
    ///< Constructor int, operation
-   ind_cpl_t(unsigned short int ind_, operation oper_):
+   ind_cpl_t(int ind_, operation oper_):
       ind(ind_), oper(oper_)
    {}
 };

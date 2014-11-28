@@ -20,21 +20,21 @@ int main (int argc, char * argv[])
    vector<symm_func_t> symm_func_list;
 
    symm_func_list.push_back(exch_in);
+   symm_func_list.push_back(exch_out);
    symm_func_list.push_back(rot_k);
    symm_func_list.push_back(compl_conj);
-
-   //symm_func_list.push_back(exch_out);
+   symm_func_list.push_back(time_rev);
 
    // Initialize vertex tensor
-   shared_ptr<vertex_tensor> vertex(new vertex_tensor(POS_FREQ_COUNT*2, PATCH_COUNT, QN_COUNT));
+   shared_ptr<vertex_tensor> vertex(new vertex_tensor(FREQ_COUNT_VERT, PATCH_COUNT, QN_COUNT));
 
    // Initialize independent coupling vector
    vector<index_t> ind_cpl_list;
 
 
-   for(int w1_in = 0; w1_in < 2*POS_FREQ_COUNT; ++w1_in)
-      for(int w2_in = 0; w2_in < 2*POS_FREQ_COUNT; ++w2_in)
-	 for(int w1_out = 0; w1_out < 2*POS_FREQ_COUNT; ++w1_out)
+   for(int w1_in = 0; w1_in < FREQ_COUNT_VERT; ++w1_in)
+      for(int w2_in = 0; w2_in < FREQ_COUNT_VERT; ++w2_in)
+	 for(int w1_out = 0; w1_out < FREQ_COUNT_VERT; ++w1_out)
 	    for(int k1_in = 0; k1_in < PATCH_COUNT; ++k1_in)
 	       for(int k2_in = 0; k2_in < PATCH_COUNT; ++k2_in)
 		  for(int k1_out = 0; k1_out < PATCH_COUNT; ++k1_out)

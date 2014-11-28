@@ -20,6 +20,7 @@ CFLAGS := -std=c++11 #-fopenmp # General compiler flags
 DBFLAGS := -O0 -g # Compiler flags for debugging
 PROFFLAGS := -O2 -g # Compiler flags for profiling
 OPTIMIZEFLAGS := -flto -march=native -Ofast -fopenmp # Compiler flags for optimal speed
+#OPTIMIZEFLAGS := -march=native -O3 # Compiler flags for optimal speed
 LIB := -lgsl -lgslcblas -lm #-fopenmp
 INC := -I include
 
