@@ -44,7 +44,7 @@ operation exch_out(index_t& ind)
       swap(ind.s1_out,ind.s2_out);
       return operation(true,false);
    }
-   return operation(false, false); 
+   return operation(false,false); 
 }
 
 operation time_rev(index_t& ind)
@@ -64,7 +64,7 @@ operation time_rev(index_t& ind)
       ind.k2_in = k2_out; 		// swap k2_in and k2_out
       // Note: no operation needed
    }
-   return operation(false, false);
+   return operation(false,false);
 }
 
 operation rot_k(index_t& ind)
@@ -80,6 +80,23 @@ operation compl_conj(index_t& ind)
    freq_sign_change(ind.w1_in);
    freq_sign_change(ind.w2_in);
    freq_sign_change(ind.w1_out);
+   return operation(false,true);
+}
+
+operation mirror_vert(index_t& ind)
+{
+   mirror_mom_vert(ind.k1_in);
+   mirror_mom_vert(ind.k2_in);
+   mirror_mom_vert(ind.k1_out);
+   return operation(false,false);
+}
+
+operation mirror_diag(index_t& ind)
+{
+   mirror_mom_diag(ind.k1_in);
+   mirror_mom_diag(ind.k2_in);
+   mirror_mom_diag(ind.k1_out);
+   return operation(false,false);
 }
 
 void freq_sign_change(int& ind)
@@ -90,6 +107,16 @@ void freq_sign_change(int& ind)
 void mom_sign_change(int& ind)
 {
    ind = sign_change_k_ind_arr[ind];
+}
+
+void mirror_mom_vert(int& ind)
+{
+   ind = mirror_mom_vert_arr[ind];
+}
+
+void mirror_mom_diag(int& ind)
+{
+   ind = mirror_mom_diag_arr[ind];
 }
 
 void swap(int& a, int& b)
